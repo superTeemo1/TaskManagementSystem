@@ -1,0 +1,56 @@
+﻿@using TakManagement.Domain.Models
+@model IEnumerable<TaskItem>
+@{
+    ViewData["Title"] = "Tasks";
+    var q = ViewData["q"] as string;
+    var status = ViewData["status"] as TakManagement.Domain.Models.TaskStatus?;
+}
+<h2>All Tasks</h2>
+
+<form method="get" class="filters" style="display:flex;gap:10px;margin:10px 0;">
+    <input type="text" name="q" placeholder="Search title/description..." value="@q" />
+    <select name="status">
+        <option value="">Any status</option>
+        @foreach (TakManagement.Domain.Models.TaskStatus s in Enum.GetValues(typeof(TakManagement.Domain.Models.TaskStatus)))
+        {
+            <option value="@s" selected="@(status == s ? "selected" : null)">@s</option>
+        }
+    </select>
+    <button type="submit">Search</button>
+    <a class="btn" href="~/Tasks">Reset</a>
+</form>
+
+<table class="table" style="width:100%;border-collapse:collapse;">
+    <thead>
+        <tr>
+            <th style="border-bottom:1px solid #ddd;padding:8px;">ID</th>
+            <th style="border-bottom:1px solid #ddd;padding:8px;">Title</th>
+            <th style="border-bottom:1px solid #ddd;padding:8px;">Status</th>
+            <th style="border-bottom:1px solid #ddd;padding:8px;">Due</th>
+            <th style="border-bottom:1px solid #ddd;padding:8px;">Actions</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var t in Model)
+        {
+            <tr>
+                <td style="border-bottom:1px solid #eee;padding:8px;">@t.Id</td>
+                <td style="border-bottom:1px solid #eee;padding:8px;"><a href="~/Tasks/Details/@t.Id">@t.Title</a></td>
+                <td style="border-bottom:1px solid #eee;padding:8px;">@t.Status</td>
+                <td style="border-bottom:1px solid #eee;padding:8px;">@(t.DueDate?.ToString("yyyy-MM-dd") ?? "—")</td>
+                <td style="border-bottom:1px solid #eee;padding:8px;">
+                    <a href="~/Tasks/Edit/@t.Id">Edit</a>
+                    <form method="post" action="~/Tasks/Delete/@t.Id" style="display:inline;margin-left:8px;">
+                        @Html.AntiForgeryToken()
+                        <button type="submit" style="background:#c33;color:#fff;border:0;border-radius:6px;padding:4px 8px;">Delete</button>
+                    </form>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+@if (!Model.Any())
+{
+    <p>No tasks yet. <a href="~/Tasks/Create">Create one</a>.</p>
+}

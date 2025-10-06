@@ -1,0 +1,22 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>@(ViewData["Title"] ?? "Task Management")</title>
+    <link rel="stylesheet" href="~/css/site.css" />
+</head>
+<body>
+    <header style="padding:10px;background:#111;color:#fff">
+        <a href="~/Tasks" style="color:#fff;margin-right:12px">Tasks</a>
+        <a href="~/Tasks/Create" style="color:#fff">Create</a>
+    </header>
+    <main class="container" style="max-width:900px;margin:0 auto;padding:20px;">
+        @if (TempData["Flash"] is string flash)
+        {
+            <div style="background:#def7de;border:1px solid #9cd49c;padding:10px;border-radius:6px;">@flash</div>
+        }
+        @RenderBody()
+    </main>
+</body>
+</html>

@@ -1,0 +1,25 @@
+﻿@model TakManagement.Domain.Models.TaskItem
+@{
+    ViewData["Title"] = "Task Details";
+}
+<h2>Task #@Model.Id</h2>
+
+<dl>
+    <dt>Title</dt>
+    <dd>@Model.Title</dd>
+    <dt>Description</dt>
+    <dd>@(Model.Description ?? "—")</dd>
+    <dt>Status</dt>
+    <dd>@Model.Status</dd>
+    <dt>Due</dt>
+    <dd>@(Model.DueDate?.ToString("yyyy-MM-dd") ?? "—")</dd>
+    <dt>Created</dt>
+    <dd>@Model.CreatedAtUtc.ToLocalTime().ToString("yyyy-MM-dd HH:mm")</dd>
+    <dt>Updated</dt>
+    <dd>@Model.UpdatedAtUtc.ToLocalTime().ToString("yyyy-MM-dd HH:mm")</dd>
+</dl>
+
+<p>
+    <a href="~/Tasks/Edit/@Model.Id">Edit</a>
+    <a class="btn" href="~/Tasks">Back</a>
+</p>
