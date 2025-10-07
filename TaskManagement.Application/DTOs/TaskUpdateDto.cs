@@ -2,7 +2,7 @@
 
 namespace TaskManagement.Application.DTOs;
 
-public class TaskUpdateDto
+public class TaskUpdateDto : ITaskForm
 {
     [Required, StringLength(100)] 
     public string Title { get; set; } = string.Empty;
@@ -13,5 +13,5 @@ public class TaskUpdateDto
     public DateTime? DueDate { get; set; }
 
     [Required] 
-    public TakManagement.Domain.Models.TaskStatus Status { get; set; }
+    public TaskManagement.Domain.Models.TaskStatus Status { get; set; }
 }

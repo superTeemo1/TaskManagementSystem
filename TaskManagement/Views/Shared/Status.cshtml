@@ -1,0 +1,23 @@
+﻿@{
+    var code = (int?)ViewData["StatusCode"] ?? 500;
+    ViewData["Title"] = $"Error {code}";
+    string title = code switch
+    {
+        404 => "Page not found",
+        403 => "Access denied",
+        400 => "Bad request",
+        _ => "Something went wrong"
+    };
+    string desc = code switch
+    {
+        404 => "We couldn't find the page you were looking for.",
+        403 => "You don't have permission to access this resource.",
+        400 => "The request could not be understood by the server.",
+        _ => "Please try again or go back to the start."
+    };
+}
+<div class="text-center py-5">
+    <h1 class="display-6 text-danger">@title (@code)</h1>
+    <p class="text-muted">@desc</p>
+    <a class="btn btn-outline-secondary mt-3" href="~/Tasks">Back to Tasks</a>
+</div>

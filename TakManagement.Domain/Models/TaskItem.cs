@@ -5,7 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace TakManagement.Domain.Models;
+namespace TaskManagement.Domain.Models;
 
 public class TaskItem
 {

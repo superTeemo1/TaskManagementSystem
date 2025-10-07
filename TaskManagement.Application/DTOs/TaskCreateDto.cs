@@ -2,9 +2,9 @@
 
 namespace TaskManagement.Application.DTOs;
 
-public class TaskCreateDto
+public class TaskCreateDto : ITaskForm
 {
-    [Required, StringLength(100)] 
+    [Required, StringLength(100, MinimumLength = 3)]
     public string Title { get; set; } = string.Empty;
 
     [StringLength(1000)]
@@ -13,5 +13,5 @@ public class TaskCreateDto
     public DateTime? DueDate { get; set; }
 
     [Required] 
-    public TakManagement.Domain.Models.TaskStatus Status { get; set; } = TakManagement.Domain.Models.TaskStatus.New;
+    public TaskManagement.Domain.Models.TaskStatus Status { get; set; } = TaskManagement.Domain.Models.TaskStatus.New;
 }

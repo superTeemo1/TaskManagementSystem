@@ -1,34 +1,14 @@
 ﻿@model TaskManagement.Application.DTOs.TaskUpdateDto
-@using TakManagement.Domain.Models
 @{
     ViewData["Title"] = "Edit Task";
 }
-<h2>Edit Task</h2>
+<h2 class="mb-4">Edit Task</h2>
 
 <form method="post">
     @Html.AntiForgeryToken()
-
-    <div class="form-group">
-        <label>Title</label>
-        <input asp-for="Title" />
-        <span class="text-danger" asp-validation-for="Title"></span>
+    <partial name="_TaskForm" model="Model" />
+    <div class="d-flex gap-2">
+        <button type="submit" class="btn btn-primary">Save changes</button>
+        <a href="~/Tasks" class="btn btn-outline-secondary">Cancel</a>
     </div>
-
-    <div class="form-group">
-        <label>Description</label>
-        <textarea asp-for="Description"></textarea>
-    </div>
-
-    <div class="form-group">
-        <label>Due Date</label>
-        <input asp-for="DueDate" type="date" />
-    </div>
-
-    <div class="form-group">
-        <label>Status</label>
-        <select asp-for="Status" asp-items="Html.GetEnumSelectList<TakManagement.Domain.Models.TaskStatus>()"></select>
-    </div>
-
-    <button type="submit">Save</button>
-    <a class="btn" href="~/Tasks">Cancel</a>
 </form>

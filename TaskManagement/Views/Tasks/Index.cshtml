@@ -1,9 +1,9 @@
-﻿@using TakManagement.Domain.Models
+﻿@using TaskManagement.Domain.Models
 @model IEnumerable<TaskItem>
 @{
     ViewData["Title"] = "Tasks";
     var q = ViewData["q"] as string;
-    var status = ViewData["status"] as TakManagement.Domain.Models.TaskStatus?;
+    var status = ViewData["status"] as TaskManagement.Domain.Models.TaskStatus?;
 }
 <h2>All Tasks</h2>
 
@@ -11,7 +11,7 @@
     <input type="text" name="q" placeholder="Search title/description..." value="@q" />
     <select name="status">
         <option value="">Any status</option>
-        @foreach (TakManagement.Domain.Models.TaskStatus s in Enum.GetValues(typeof(TakManagement.Domain.Models.TaskStatus)))
+        @foreach (TaskManagement.Domain.Models.TaskStatus s in Enum.GetValues(typeof(TaskManagement.Domain.Models.TaskStatus)))
         {
             <option value="@s" selected="@(status == s ? "selected" : null)">@s</option>
         }
@@ -40,9 +40,9 @@
                 <td style="border-bottom:1px solid #eee;padding:8px;">@(t.DueDate?.ToString("yyyy-MM-dd") ?? "—")</td>
                 <td style="border-bottom:1px solid #eee;padding:8px;">
                     <a href="~/Tasks/Edit/@t.Id">Edit</a>
-                    <form method="post" action="~/Tasks/Delete/@t.Id" style="display:inline;margin-left:8px;">
+                    <form method="post" action="~/Tasks/Delete/@t.Id" onsubmit="return confirm('Delete this task?');" class="d-inline">
                         @Html.AntiForgeryToken()
-                        <button type="submit" style="background:#c33;color:#fff;border:0;border-radius:6px;padding:4px 8px;">Delete</button>
+                        <button type="submit" class="btn btn-sm btn-danger">Delete</button>
                     </form>
                 </td>
             </tr>

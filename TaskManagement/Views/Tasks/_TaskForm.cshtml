@@ -1,0 +1,40 @@
+﻿@model TaskManagement.Application.DTOs.ITaskForm
+@using TaskManagement.Domain.Models
+
+@* Shared form for Create/Edit. Model can be TaskCreateDto or TaskUpdateDto (they share fields). *@
+
+@if (!ViewData.ModelState.IsValid)
+{
+    <div class="alert alert-danger">
+        Please correct the errors below and try again.
+    </div>
+}
+<div asp-validation-summary="ModelOnly" class="text-danger mb-3"></div>
+
+<div class="mb-3">
+    <label asp-for="Title" class="form-label"></label>
+    <input asp-for="Title" class="form-control" />
+    <span class="text-danger" asp-validation-for="Title"></span>
+</div>
+
+<div class="mb-3">
+    <label asp-for="Description" class="form-label"></label>
+    <textarea asp-for="Description" rows="3" class="form-control"></textarea>
+    <span class="text-danger" asp-validation-for="Description"></span>
+</div>
+
+<div class="mb-3">
+    <label asp-for="DueDate" class="form-label"></label>
+    <input asp-for="DueDate" type="date" class="form-control" />
+    <span class="text-danger" asp-validation-for="DueDate"></span>
+</div>
+
+<div class="mb-3">
+    <label asp-for="Status" class="form-label"></label>
+    <select asp-for="Status" asp-items="Html.GetEnumSelectList<TaskManagement.Domain.Models.TaskStatus>()" class="form-select"></select>
+    <span class="text-danger" asp-validation-for="Status"></span>
+</div>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}

@@ -1,6 +1,6 @@
-﻿using TakManagement.Domain.Models;
+﻿using TaskManagement.Domain.Models;
 
-namespace TakManagement.Domain.Abstractions;
+namespace TaskManagement.Domain.Abstractions;
 
 public interface ITaskRepository
 {

@@ -1,4 +1,4 @@
-﻿using TakManagement.Domain.Models;
+﻿using TaskManagement.Domain.Models;
 using TaskManagement.Application.DTOs;
 
 namespace TaskManagement.Application.Services;
@@ -9,7 +9,7 @@ public interface ITaskService
 
     TaskItem? Get(int id);
 
-    IEnumerable<TaskItem> GetAll(string? q = null, TakManagement.Domain.Models.TaskStatus? status = null);
+    IEnumerable<TaskItem> GetAll(string? q = null, TaskManagement.Domain.Models.TaskStatus? status = null);
 
     bool Update(int id, TaskUpdateDto dto);
 

@@ -1,25 +1,37 @@
-﻿@model TakManagement.Domain.Models.TaskItem
+﻿@model TaskManagement.Domain.Models.TaskItem
 @{
     ViewData["Title"] = "Task Details";
 }
-<h2>Task #@Model.Id</h2>
+<h2 class="mb-4">Task Details</h2>
 
-<dl>
-    <dt>Title</dt>
-    <dd>@Model.Title</dd>
-    <dt>Description</dt>
-    <dd>@(Model.Description ?? "—")</dd>
-    <dt>Status</dt>
-    <dd>@Model.Status</dd>
-    <dt>Due</dt>
-    <dd>@(Model.DueDate?.ToString("yyyy-MM-dd") ?? "—")</dd>
-    <dt>Created</dt>
-    <dd>@Model.CreatedAtUtc.ToLocalTime().ToString("yyyy-MM-dd HH:mm")</dd>
-    <dt>Updated</dt>
-    <dd>@Model.UpdatedAtUtc.ToLocalTime().ToString("yyyy-MM-dd HH:mm")</dd>
+<dl class="row">
+    <dt class="col-sm-3">ID</dt>
+    <dd class="col-sm-9">@Model.Id</dd>
+
+    <dt class="col-sm-3">Title</dt>
+    <dd class="col-sm-9">@Model.Title</dd>
+
+    <dt class="col-sm-3">Description</dt>
+    <dd class="col-sm-9">@Model.Description ?? "-" </dd>
+
+    <dt class="col-sm-3">Due date</dt>
+    <dd class="col-sm-9">@Model.DueDate?.ToString("yyyy-MM-dd") ?? "-"</dd>
+
+    <dt class="col-sm-3">Status</dt>
+    <dd class="col-sm-9">@Model.Status</dd>
+
+    <dt class="col-sm-3">Created</dt>
+    <dd class="col-sm-9">@Model.CreatedAtUtc.ToString("u")</dd>
+
+    <dt class="col-sm-3">Updated</dt>
+    <dd class="col-sm-9">@Model.UpdatedAtUtc.ToString("u")</dd>
 </dl>
 
-<p>
-    <a href="~/Tasks/Edit/@Model.Id">Edit</a>
-    <a class="btn" href="~/Tasks">Back</a>
-</p>
+<div class="d-flex gap-3">
+    <a class="btn btn-primary" href="~/Tasks/Edit/@Model.Id">Edit</a>
+    <form method="post" action="~/Tasks/Delete/@Model.Id" onsubmit="return confirm('Delete this task?');">
+        @Html.AntiForgeryToken()
+        <button type="submit" class="btn btn-danger">Delete</button>
+    </form>
+    <a class="btn btn-outline-secondary" href="~/Tasks">Back</a>
+</div>

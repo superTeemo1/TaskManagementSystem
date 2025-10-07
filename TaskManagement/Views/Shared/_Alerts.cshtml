@@ -1,0 +1,24 @@
+﻿@{
+    var hasAny = TempData.ContainsKey("Flash") || TempData.ContainsKey("FlashError") || TempData.ContainsKey("FlashWarn");
+}
+@if (hasAny)
+{
+    var msg = TempData["Flash"] as string;
+    var err = TempData["FlashError"] as string;
+    var wrn = TempData["FlashWarn"] as string;
+
+    <div class="container mt-3">
+        @if (!string.IsNullOrWhiteSpace(msg))
+        {
+            <div class="alert alert-success" role="alert">@msg</div>
+        }
+        @if (!string.IsNullOrWhiteSpace(err))
+        {
+            <div class="alert alert-danger" role="alert">@err</div>
+        }
+        @if (!string.IsNullOrWhiteSpace(wrn))
+        {
+            <div class="alert alert-warning" role="alert">@wrn</div>
+        }
+    </div>
+}
