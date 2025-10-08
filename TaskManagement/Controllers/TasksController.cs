@@ -81,7 +81,6 @@ namespace TaskManagement.Web.Controllers
                 // Map every field error to ModelState -> messages appear next to inputs
                 foreach (var (field, message) in vex.Errors)
                 {
-                    // field is like nameof(dto.DueDate) etc.
                     ModelState.AddModelError(field, message);
                     _logger.LogWarning("Validation error creating task: {Field} - {Message}", field, message);
                 }
@@ -89,7 +88,6 @@ namespace TaskManagement.Web.Controllers
             }
             catch (ValidationException ex)
             {
-                // Fallback for non-field validations (guards)
                 ModelState.AddModelError(string.Empty, ex.Message);
                 _logger.LogError(ex, "Validation error creating task");
                 return View(dto);

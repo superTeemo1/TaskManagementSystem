@@ -50,8 +50,6 @@ app.MapControllerRoute(
     name: "default",
     pattern: "{controller=Tasks}/{action=Index}/{id?}");
 
-app.Run();
-
 try
 {
     Log.Information("Starting up TaskManagement app");

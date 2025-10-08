@@ -156,7 +156,11 @@ public class TaskService : ITaskService
     /// <exception cref="ValidationException">If id is invalid.</exception>
     public TaskItem? Get(int id)
     {
-        if (id <= 0) throw new ValidationException("Id must be a positive integer.");
+        if (id <= 0)
+        {
+            throw new ValidationException("Id must be a positive integer.");
+        }
+
         return _repo.Get(id);
     }
 

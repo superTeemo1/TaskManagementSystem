@@ -1,122 +1,128 @@
-# 📝 Task Management System – ASP.NET Core (.NET 8)
+# Task Management System
 
-A simple REST API and MVC web application for managing tasks, built with **ASP.NET Core 8**, **C#**, and **Razor Views**.  
-The system uses an **in-memory repository** (no database) and supports basic CRUD operations.
+A simple web application for managing tasks.  
+Users can create, edit, view, delete, and filter tasks by title or status.
 
----
-
-## 🚀 Features
-
-✅ Create, read, update, and delete tasks  
-✅ Search and filter by title, description, or status  
-✅ REST API endpoints (`/api/tasks`)  
-✅ In-memory storage (no external DB)  
-✅ MVC frontend with Razor Views  
-✅ Simple and clean UI  
-✅ Ready for testing and extension
+The project was built as a practical example of applying clean architecture principles using ASP.NET Core.
 
 ---
 
-## 🧩 Technologies & Architecture
+## Features
 
-**Framework:** .NET 8  
-**Frontend:** ASP.NET Core MVC (Razor Views)  
-**Backend:** C# – layered architecture (Service + Repository)  
-**Dependency Injection:** Built-in  
-**Persistence:** InMemoryTaskRepository  
-
-**Solution structure:**
-```
-TaskManagement/
- ├─ TaskManagement.Domain          # Models and interfaces
- ├─ TaskManagement.Application     # DTOs and business logic
- ├─ TaskManagement.Infrastructure  # In-memory repository
- ├─ TaskManagement.Web             # MVC UI and REST API
- └─ TaskManagement.Tests           # Unit tests (optional)
-```
+- Create, edit, and delete tasks  
+- Search and filter tasks by title or status  
+- Validation of all user inputs  
+- Display of error and success messages  
+- Simple and responsive interface  
+- File-based logging and exception handling  
+- Unit tests for key application layers  
 
 ---
 
-## ⚙️ How to Run Locally
+## Architecture Overview
 
-### 1️⃣ Requirements
-- [Visual Studio 2022](https://visualstudio.microsoft.com/downloads/) (v17.8 or later)
-- [.NET 8 SDK](https://dotnet.microsoft.com/en-us/download/dotnet/8.0)
+This project follows a **clean layered architecture**:
 
-### 2️⃣ Clone the repository
+| Layer | Description |
+|--------|-------------|
+| **Domain** | Core entities and business logic |
+| **Application** | DTOs, validation, and service layer |
+| **Infrastructure** | Repository implementations and data access |
+| **Web** | ASP.NET Core MVC layer (controllers, Razor views, error handling) |
+| **Tests** | Unit tests for services and repositories using xUnit |
+
+---
+
+## Technologies Used
+
+- **.NET 8 / ASP.NET Core MVC**  
+- **C#**  
+- **Razor Views**  
+- **Dependency Injection**  
+- **xUnit** for testing  
+- **File-based logging (ILogger)**  
+- **Docker** for containerization  
+
+---
+
+## Getting Started (Run Locally)
+
+1. Clone the repository:
+   ```bash
+   git clone https://github.com/superTeemo1/TaskManagementSystem.git
+   ```
+
+2. Navigate to the web project:
+   ```bash
+   cd TaskManagement/TaskManagement.Web
+   ```
+
+3. Restore dependencies and run the application:
+   ```bash
+   dotnet restore
+   dotnet run
+   ```
+
+4. Open the app in your browser:
+   ```
+   https://localhost:7278
+   ```
+
+---
+
+## Run with Docker
+
+You can also run the application in a Docker container:
+
 ```bash
-git clone https://github.com/superTeemo1/TaskManagementSystem
-cd TaskManagement
+docker build -t taskmanagement .
+docker run -p 8080:8080 taskmanagement
 ```
 
-### 3️⃣ Run the application
-Using Visual Studio:
-- Set **TaskManagement.Web** as *Startup Project*
-- Press **F5** or **Ctrl+F5**
-
-Using CLI:
-```bash
-cd TaskManagement.Web
-dotnet run
-```
-
-### 4️⃣ Open in your browser
-```
-https://localhost:5001/Tasks
-```
+The app will be available at:  
+👉 http://localhost:8080
 
 ---
 
-## 🔗 API Endpoints
+## Running Tests
 
-| Method | Route | Description |
-|--------|-------|-------------|
-| `GET` | `/api/tasks` | Retrieve all tasks |
-| `GET` | `/api/tasks/{id}` | Retrieve a specific task |
-| `POST` | `/api/tasks` | Create a new task |
-| `PUT` | `/api/tasks/{id}` | Update an existing task |
-| `DELETE` | `/api/tasks/{id}` | Delete a task |
+To run all unit tests:
 
-### 📘 Example `POST` request
-```json
-POST /api/tasks
-{
-  "title": "Implement frontend",
-  "description": "Create Razor views for task management",
-  "status": "InProgress"
-}
-```
-
----
-
-## 🌐 Deployment (optional)
-
-To deploy online:
-- Use **Azure App Service**, **Render**, or any .NET-capable host.
-- Build release version:
-  ```bash
-  dotnet publish -c Release -o ./publish
-  ```
-  Deploy the contents of the `publish` folder.
-
----
-
-## 🧠 Testing (optional)
-
-Run tests:
 ```bash
 cd TaskManagement.Tests
 dotnet test
 ```
 
----
-
-## 👨‍💻 Author & Notes
-
-This project is part of a **.NET Developer technical assessment**.  
-It demonstrates clean architecture, separation of concerns, and production-level code quality using an in-memory persistence layer.
+Tests cover:
+- Validation logic (ServiceValidationTests)
+- Repository behavior (RepositoryInvariantTests)
+- Edge cases (invalid inputs, missing entities, etc.)
 
 ---
 
-## 📄 License
-MIT License (optional)
+## Deployment
+
+The project is deployed using **Render**.  
+You can view the live version here:  
+👉 [https://taskmanagementsystem-u1qr.onrender.com/](https://taskmanagementsystem-u1qr.onrender.com/)
+
+Deployment uses a Docker-based setup to ensure consistent environment configuration.
+
+---
+
+## Project Goals
+
+This project demonstrates:
+- Application of clean architecture and separation of concerns  
+- Input validation and structured error handling  
+- Layered testing approach  
+- MVC pattern with Razor views  
+- Logging and observability via file logs  
+- Deployment of .NET applications using Docker and Render  
+
+---
+
+## Author
+
+**Jasmin**  
+Built as part of a .NET clean architecture and testing exercise.
